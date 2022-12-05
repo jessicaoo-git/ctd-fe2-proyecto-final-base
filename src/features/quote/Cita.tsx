@@ -36,6 +36,7 @@ function Cita() {
         placeholder="Ingresa el nombre del autor"
       />
       <Boton
+        data-testid="quote-button"
         aria-label={valorInput ? "Obtener Cita" : "Obtener cita aleatoria"}
         onClick={onClickObtenerCita}
       >
