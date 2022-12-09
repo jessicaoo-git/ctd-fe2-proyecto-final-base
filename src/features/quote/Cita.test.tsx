@@ -41,7 +41,7 @@ describe("Test en <Cita/>", ()=>{
     })
 
     test('Al ingresar números en el imput mostrar mensaje de alerta "Por favor ingrese un nombre válido"', async()=>{
-        render(<Cita/>)
+        render(<Cita/>);
         const imputCita = screen.getByPlaceholderText('Ingresa el nombre del autor');
         const buttonQuote = screen.getByTestId("quote-button")
 
@@ -51,5 +51,37 @@ describe("Test en <Cita/>", ()=>{
 
         expect(await screen.findByText('Por favor ingrese un nombre válido')).toBeInTheDocument();
     })
+
+
+    // test('Se debe poder visualizar una cita', async() => {
+    //     render(<Cita/>);
+
+    //     let cita = "Eat my shorts"
+    //     const imputCita =screen.getByPlaceholderText("Ingresa el nombre del autor");
+    //     await userEvent.type(imputCita, "Bart Simpson");
+    //     const button = screen.getByText(/Obtener cita/i);
+    //     await userEvent.click(button)
+
+    //     // eslint-disable-next-line testing-library/no-debugging-utils
+    //     screen.debug()
+    //     expect(await screen.findByText(cita)).toBeInTheDocument()
+    // })
+
+    test("Debe limpiar lo que esta en el imput", async()=>{
+        render(<Cita/>);
+
+        const imputCita = screen.getByPlaceholderText('Ingresa el nombre del autor');
+        await userEvent.type(imputCita,"Homer Simpson");
+        expect(imputCita as HTMLInputElement).toHaveValue("Homer Simpson");
+
+        const button = screen.getByText("Borrar");
+        await userEvent.click(button);
+        expect(imputCita as HTMLInputElement).toHaveValue("");
+
+    })
+
+
+
+
 
 })
